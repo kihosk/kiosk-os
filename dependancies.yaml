@@ -99,5 +99,5 @@
 
     - name: Download latest Kiosk is specified
       get_url:
-        url: { { latesturl } }
+        url: "{{ latesturl }}"
         dest: /home/pi/kiosk-app.AppImage
