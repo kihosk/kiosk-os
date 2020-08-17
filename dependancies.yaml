@@ -29,9 +29,6 @@
           # Allow quitting the X server with CTRL-ATL-Backspace
           setxkbmap -option terminate:ctrl_alt_bksp
           /home/pi/kiosk-app.AppImage
-    # - name: autologin pi user file
-    #   path: /etc/systemd/system/getty@tty1.service.d
-    #   state: file
     - name: autologin pi user directory
       file:
         path: /etc/systemd/system/getty@tty1.service.d
@@ -44,3 +41,45 @@
         block: |
           ExecStart=
           ExecStart=-/sbin/agetty --autologin ${USER} --noclear %I 38400 linux
+    - name: splashscreen
+      blockinfile:
+        create: true
+        path: /etc/systemd/system/splashscreen.service
+        block: |
+          ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -a /home/pi/splashscreen.jpg
+          StandardInput=tty
+          StandardOutput=tty
+          [Install]
+          WantedBy=sysinit.target
+    - name: boot settings
+      blockinfile:
+        create: true
+        path: /etc/systemd/system/splashscreen.service
+        block: |
+          dtparam=audio=on
+          display_hdmi_rotate=0
+          disable_splash=1
+          disable_overscan=1
+          #Enabling 4k60Hz for TVs
+          hdmi_enable_4kp60=1
+          gpu_mem=128
+          gpu_mem_256=128
+          gpu_mem_512=196
+          gpu_mem_1024=384
+          hdmi_force_hotplug=1
+          hdmi_ignore_edid=0xa5000080
+          hdmi_group=1
+          #Enabling 1080p mode
+          hdmi_mode=16
+          # Increasing signal to HDMI
+          config_hdmi_boost=4
+    - name: unattended upgrades
+      blockinfile:
+        create: true
+        path: /etc/apt/apt.conf.d/50unattended-upgrades
+        block: |
+          Unattended-Upgrade::Origins-Pattern {
+              "origin=Debian,codename=${distro_codename},label=Debian-Security";
+          };
+          Unattended-Upgrade::Package-Blacklist {
+          };
