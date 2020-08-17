@@ -1,5 +1,5 @@
 [Unit]
-Description=Splash screen
+Description=Splashscreen
 DefaultDependencies=no
 After=local-fs.target
 

@@ -47,7 +47,7 @@
         dest: /home/pi/splashscreen.jpg
     - name: splashscreen service
       systemd:
-        name: splashscreen.service
+        name: splashscreen
         enabled: yes
         state: started
     - name: boot settings
