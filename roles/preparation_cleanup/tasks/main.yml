@@ -1,9 +1,9 @@
 - name: Cleanup
   shell: |
     # Remove machine ID
-    sudo rm /etc/machine-id
+    sudo rm -f /etc/machine-id
     sudo touch /etc/machine-id
 
     # Removing bash history and unsetting current session
-    rm .bash_history
+    rm -f .bash_history
     history -c
