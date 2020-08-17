@@ -1,0 +1,12 @@
+- name: Get Latest
+  shell: |
+    FILE=$(curl -s https://kiosk-app-files.s3.eu-central-1.amazonaws.com/alpha-linux-arm.yml | grep path | sed 's|path: ||')
+    URL="https://kiosk-app-files.s3.eu-central-1.amazonaws.com/${FILE}"
+    echo $URL
+  register: latesturl
+
+- name: Download latest Kiosk is specified
+  get_url:
+    url: "{{ latesturl.stdout }}"
+    dest: /home/pi/kiosk-app.AppImage
+    mode: "775"

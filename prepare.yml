@@ -3,6 +3,9 @@
   roles:
     - libraries
     - x11
+    - boot_config
     - autologin
     - splashscreen
-    - others
+    - services
+    - download_latest
+    - preparation_cleanup
