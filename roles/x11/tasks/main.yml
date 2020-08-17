@@ -2,7 +2,7 @@
   blockinfile:
     path: /home/pi/.bashrc
     block: |
-      [[ -z $DISPLAY && $XDG_VTNR ]] && startx -- -nocursor
+      [[ -z $DISPLAY && $XDG_VTNR = 1 ]] && startx -- -nocursor
 
 - name: Enable autostarting of Kiosk app [copy file]
   copy:
