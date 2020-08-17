@@ -1,18 +1,19 @@
 - name: Install OS libraries
   apt:
-    name: "{{ item }}"
+    name:
+      [
+        "ntp",
+        "xserver-xorg",
+        "x11-xserver-utils",
+        "xinit",
+        "openbox",
+        "chromium",
+        "fbi",
+        "ufw",
+        "unattended-upgrades",
+        "fail2ban",
+        "hostapd",
+        "dnsmasq",
+      ]
     state: present
     update_cache: True
-  with_items:
-    - ntp
-    - xserver-xorg
-    - x11-xserver-utils
-    - xinit
-    - openbox
-    - chromium
-    - fbi
-    - ufw
-    - unattended-upgrades
-    - fail2ban
-    - hostapd
-    - dnsmasq
