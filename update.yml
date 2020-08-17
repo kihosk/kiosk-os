@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  roles:
+    - libraries
+    - x11
+    - boot_config
+    - autologin
+    - splashscreen
+    - services
