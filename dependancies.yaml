@@ -18,6 +18,12 @@
           - dnsmasq
         state: present
 
+    - name: Enable X11 on startup
+      blockinfile:
+        path: /home/pi/.bashrc
+        block: |
+          [[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && startx -- -nocursor
+
     - name: Enable autostarting of Kiosk app [copy file]
       blockinfile:
         path: /etc/xdg/openbox/autostart
@@ -102,3 +108,16 @@
         url: "{{ latesturl.stdout }}"
         dest: /home/pi/kiosk-app.AppImage
         mode: "775"
+
+    - name: Remove machine id
+      shell: |
+
+    - name: Cleanup
+      shell: |
+        # Remove machine ID
+        sudo rm /etc/machine-id
+        sudo touch /etc/machine-id
+
+        # Removing bash history and unsetting current session
+        rm .bash_history
+        history -c
