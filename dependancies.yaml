@@ -50,6 +50,7 @@
       systemd:
         name: splashscreen.service
         enabled: yes
+        state: started
     - name: boot settings
       copy:
         src: config.txt
