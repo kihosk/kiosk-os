@@ -49,7 +49,6 @@
       systemd:
         name: splashscreen
         enabled: yes
-        state: started
     - name: boot settings
       copy:
         src: config.txt
@@ -62,3 +61,15 @@
       copy:
         src: cmdline.txt
         dest: /boot/cmdline.txt
+    - name: fail2ban config
+      copy:
+        src: jail.local
+        dest: /etc/fail2ban/jail.local
+    - name: copy wifi service definition
+      copy:
+        src: rfkill-unblock-wifi.service
+        dest: /etc/systemd/system/rfkill-unblock-wifi.service
+    - name: wifi service enable
+      systemd:
+        name: rfkill-unblock-wifi
+        enabled: yes
