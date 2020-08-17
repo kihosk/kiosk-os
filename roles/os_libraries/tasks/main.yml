@@ -1,4 +1,3 @@
----
 - name: Install OS libraries
   package:
     name:
