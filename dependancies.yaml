@@ -29,3 +29,12 @@
           # Allow quitting the X server with CTRL-ATL-Backspace
           setxkbmap -option terminate:ctrl_alt_bksp
           /home/pi/kiosk-app.AppImage
+    # - name: autologin pi user file
+    #   path: /etc/systemd/system/getty@tty1.service.d
+    #   state: file
+    - name: autologin pi user
+      create: true
+      path: /etc/systemd/system/getty@tty1.service.d
+      block: |
+        ExecStart=
+        ExecStart=-/sbin/agetty --autologin ${USER} --noclear %I 38400 linux
