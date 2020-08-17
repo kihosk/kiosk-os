@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-    - name: install os libraries
+    - name: Install OS libraries
       package:
         name:
           - ntp
@@ -17,7 +17,8 @@
           - hostapd
           - dnsmasq
         state: present
-    - name: openbox
+
+    - name: Enable autostarting of Kiosk app [copy file]
       blockinfile:
         path: /etc/xdg/openbox/autostart
         block: |
@@ -29,47 +30,65 @@
           # Allow quitting the X server with CTRL-ATL-Backspace
           setxkbmap -option terminate:ctrl_alt_bksp
           /home/pi/kiosk-app.AppImage
-    - name: autologin pi user directory
+
+    - name: Autologin Pi user [copy file]
       file:
         path: /etc/systemd/system/getty@tty1.service.d
         state: directory
-    - name: autologin pi user
+
+    - name: Autologin Pi user [enable service]
       copy:
         src: configs/autorun.conf
         dest: /etc/systemd/system/getty@tty1.service.d/autorun.conf
-    - name: copy splashscreen service file
+
+    - name: Splashscreen service [copy file]
       copy:
         src: configs/splashscreen.service
         dest: /etc/systemd/system/splashscreen.service
-    - name: download splashscreen
+
+    - name: Splashscreen service [download image]
       get_url:
         url: https://kiosk-rpi-files.s3.eu-central-1.amazonaws.com/splashscreen.jpg
         dest: /home/pi/splashscreen.jpg
-    - name: splashscreen service
+
+    - name: Splashscreen service [enable service]
       systemd:
         name: splashscreen
         enabled: yes
-    - name: boot settings
+
+    - name: Boot configuration [copy file]
       copy:
         src: configs/config.txt
         dest: /boot/config.txt
-    - name: unattended upgrades
+
+    - name: Unattended upgrades [enable]
       copy:
         src: configs/50unattended-upgrades
         dest: /etc/apt/apt.conf.d/50unattended-upgrades
-    - name: kernel settings
+
+    - name: Kernel settings [copy file]
       copy:
         src: configs/cmdline.txt
         dest: /boot/cmdline.txt
-    - name: fail2ban config
+
+    - name: Fail2ban config [copy file]
       copy:
         src: configs/jail.local
         dest: /etc/fail2ban/jail.local
-    - name: copy wifi service definition
+
+    - name: Wifi service [copy file]
       copy:
         src: configs/rfkill-unblock-wifi.service
         dest: /etc/systemd/system/rfkill-unblock-wifi.service
-    - name: wifi service enable
+
+    - name: Wifi service [enable]
       systemd:
         name: rfkill-unblock-wifi
         enabled: yes
+
+    # - name: Download latest Kiosk is specified
+    #   get_url:
+    #     url: {{curl -s https://kiosk-app-files.s3.eu-central-1.amazonaws.com/alpha-linux-arm.yml | grep path | sed \'s|path: ||\' }}
+
+    - name: Test
+      shell: env >> /home/pi/envfile
