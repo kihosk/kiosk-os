@@ -35,11 +35,11 @@
         state: directory
     - name: autologin pi user
       copy:
-        src: autorun.conf
+        src: configs/autorun.conf
         dest: /etc/systemd/system/getty@tty1.service.d/autorun.conf
     - name: copy splashscreen service file
       copy:
-        src: splashscreen.service
+        src: configs/splashscreen.service
         dest: /etc/systemd/system/splashscreen.service
     - name: download splashscreen
       get_url:
@@ -51,23 +51,23 @@
         enabled: yes
     - name: boot settings
       copy:
-        src: config.txt
+        src: configs/config.txt
         dest: /boot/config.txt
     - name: unattended upgrades
       copy:
-        src: 50unattended-upgrades
+        src: configs/50unattended-upgrades
         dest: /etc/apt/apt.conf.d/50unattended-upgrades
     - name: kernel settings
       copy:
-        src: cmdline.txt
+        src: configs/cmdline.txt
         dest: /boot/cmdline.txt
     - name: fail2ban config
       copy:
-        src: jail.local
+        src: configs/jail.local
         dest: /etc/fail2ban/jail.local
     - name: copy wifi service definition
       copy:
-        src: rfkill-unblock-wifi.service
+        src: configs/rfkill-unblock-wifi.service
         dest: /etc/systemd/system/rfkill-unblock-wifi.service
     - name: wifi service enable
       systemd:
