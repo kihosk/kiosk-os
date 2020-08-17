@@ -33,7 +33,6 @@
       file:
         path: /etc/systemd/system/getty@tty1.service.d
         state: directory
-        mode: "0755"
     - name: autologin pi user
       copy:
         src: autorun.conf
