@@ -35,30 +35,13 @@
         state: directory
         mode: "0755"
     - name: autologin pi user
-      blockinfile:
-        create: true
-        path: /etc/systemd/system/getty@tty1.service.d/autorun.conf
-        block: |
-          ExecStart=
-          ExecStart=-/sbin/agetty --autologin ${USER} --noclear %I 38400 linux
-    - name: splashscreen
-      blockinfile:
-        create: true
-        path: /etc/systemd/system/splashscreen.service
-        marker: False
-        block: |
-          [Unit]
-          Description=Splash screen
-          DefaultDependencies=no
-          After=local-fs.target
-
-          [Service]
-          ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -a /home/pi/splashscreen.jpg
-          StandardInput=tty
-          StandardOutput=tty
-
-          [Install]
-          WantedBy=sysinit.target
+      copy:
+        src: autorun.conf
+        dest: /etc/systemd/system/getty@tty1.service.d/autorun.conf
+    - name: copy splashscreen service file
+      copy:
+        src: splashscreen.service
+        dest: /etc/systemd/system/splashscreen.service
     - name: download splashscreen
       get_url:
         url: https://kiosk-rpi-files.s3.eu-central-1.amazonaws.com/splashscreen.jpg
@@ -68,39 +51,14 @@
         name: splashscreen.service
         enabled: yes
     - name: boot settings
-      blockinfile:
-        create: true
-        path: /boot/config.txt
-        block: |
-          dtparam=audio=on
-          display_hdmi_rotate=0
-          disable_splash=1
-          disable_overscan=1
-          #Enabling 4k60Hz for TVs
-          hdmi_enable_4kp60=1
-          gpu_mem=128
-          gpu_mem_256=128
-          gpu_mem_512=196
-          gpu_mem_1024=384
-          hdmi_force_hotplug=1
-          hdmi_ignore_edid=0xa5000080
-          hdmi_group=1
-          #Enabling 1080p mode
-          hdmi_mode=16
-          # Increasing signal to HDMI
-          config_hdmi_boost=4
+      copy:
+        src: config.txt
+        dest: /boot/config.txt
     - name: unattended upgrades
-      blockinfile:
-        create: true
-        path: /etc/apt/apt.conf.d/50unattended-upgrades
-        block: |
-          Unattended-Upgrade::Origins-Pattern {
-              "origin=Debian,codename=${distro_codename},label=Debian-Security";
-          };
-          Unattended-Upgrade::Package-Blacklist {
-          };
+      copy:
+        src: 50unattended-upgrades
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades
     - name: kernel settings
-      blockinfile:
-        path: /boot/cmdline.txt
-        block: console=serial0,115200 console=tty1 root=PARTUUID=57d110d5-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles logo.nologo consoleblank=0 loglevel=1 quiet
-        marker: False
+      copy:
+        src: cmdline.txt
+        dest: /boot/cmdline.txt
