@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
   roles:
-    - os_libraries
+    - libraries
+    - x11
+    - autologin
+    - splashscreen
     - others

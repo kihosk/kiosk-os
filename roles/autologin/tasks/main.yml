@@ -1,0 +1,9 @@
+- name: Autologin Pi user [copy file]
+  file:
+    path: /etc/systemd/system/getty@tty1.service.d
+    state: directory
+
+- name: Autologin Pi user [enable service]
+  copy:
+    src: autorun.conf
+    dest: /etc/systemd/system/getty@tty1.service.d/autorun.conf

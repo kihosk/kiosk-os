@@ -1,0 +1,14 @@
+- name: Splashscreen service [copy file]
+  copy:
+    src: splashscreen.service
+    dest: /etc/systemd/system/splashscreen.service
+
+- name: Splashscreen service [download image]
+  get_url:
+    url: https://kiosk-rpi-files.s3.eu-central-1.amazonaws.com/splashscreen.jpg
+    dest: /home/pi/splashscreen.jpg
+
+- name: Splashscreen service [enable service]
+  systemd:
+    name: splashscreen
+    enabled: yes
