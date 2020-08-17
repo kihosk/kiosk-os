@@ -55,6 +55,10 @@
       get_url:
         url: https://kiosk-rpi-files.s3.eu-central-1.amazonaws.com/splashscreen.jpg
         dest: /home/pi/splashscreen.jpg
+    - name: splashscreen service
+      systemd:
+        name: splashscreen
+        enabled: yes
     - name: boot settings
       blockinfile:
         create: true
