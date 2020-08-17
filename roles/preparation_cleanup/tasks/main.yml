@@ -5,5 +5,4 @@
     sudo touch /etc/machine-id
 
     # Removing bash history and unsetting current session
-    rm -f .bash_history
-    history -c
+    rm -f /home/pi/.bash_history
