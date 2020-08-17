@@ -2,8 +2,3 @@
   copy:
     src: config.txt
     dest: /boot/config.txt
-
-- name: Kernel settings [copy file]
-  copy:
-    src: cmdline.txt
-    dest: /boot/cmdline.txt

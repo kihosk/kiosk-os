@@ -4,6 +4,7 @@
     - libraries
     - x11
     - boot_config
+    - boot_kernel
     - autologin
     - splashscreen
     - services
