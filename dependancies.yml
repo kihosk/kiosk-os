@@ -1,5 +1,5 @@
 ---
-- hosts: raspberrypi
+- hosts: localhost
   roles:
     - os_libraries
     - others
