@@ -91,4 +91,5 @@
     #     url: {{curl -s https://kiosk-app-files.s3.eu-central-1.amazonaws.com/alpha-linux-arm.yml | grep path | sed \'s|path: ||\' }}
 
     - name: Test
-      shell: env >> /home/pi/envfile
+      shell: |
+        {{ my_version }} >> /home/pi/envfile
