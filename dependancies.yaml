@@ -57,7 +57,7 @@
         dest: /home/pi/splashscreen.jpg
     - name: splashscreen service
       systemd:
-        name: splashscreen
+        name: splashscreen.service
         enabled: yes
     - name: boot settings
       blockinfile:
