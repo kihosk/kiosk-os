@@ -46,9 +46,16 @@
         create: true
         path: /etc/systemd/system/splashscreen.service
         block: |
+          [Unit]
+          Description=Splash screen
+          DefaultDependencies=no
+          After=local-fs.target
+
+          [Service]
           ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -a /home/pi/splashscreen.jpg
           StandardInput=tty
           StandardOutput=tty
+
           [Install]
           WantedBy=sysinit.target
     - name: download splashscreen
