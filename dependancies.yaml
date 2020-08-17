@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-
   tasks:
     - name: install os libraries
       package:
@@ -18,3 +17,15 @@
           - hostapd
           - dnsmasq
         state: present
+    - name: openbox
+      blockinfile:
+        path: /etc/xdg/openbox/autostart
+        block: |
+          # Disable any form of screen saver / screen blanking / power management
+          xset s off
+          xset s noblank
+          xset -dpms
+
+          # Allow quitting the X server with CTRL-ATL-Backspace
+          setxkbmap -option terminate:ctrl_alt_bksp
+          /home/pi/kiosk-app.AppImage
