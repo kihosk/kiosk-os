@@ -1,16 +1,16 @@
 - name: Unattended upgrades [enable]
   copy:
-    src: configs/50unattended-upgrades
+    src: 50unattended-upgrades
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
 
 - name: Fail2ban config [copy file]
   copy:
-    src: configs/jail.local
+    src: jail.local
     dest: /etc/fail2ban/jail.local
 
 - name: Wifi service [copy file]
   copy:
-    src: configs/rfkill-unblock-wifi.service
+    src: rfkill-unblock-wifi.service
     dest: /etc/systemd/system/rfkill-unblock-wifi.service
 
 - name: Wifi service [enable]
