@@ -51,6 +51,10 @@
           StandardOutput=tty
           [Install]
           WantedBy=sysinit.target
+    - name: download splashscreen
+      get_url:
+        url: https://kiosk-rpi-files.s3.eu-central-1.amazonaws.com/splashscreen.jpg
+        dest: /home/pi/splashscreen.jpg
     - name: boot settings
       blockinfile:
         create: true
