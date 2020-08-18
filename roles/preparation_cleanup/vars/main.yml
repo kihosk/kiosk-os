@@ -1,0 +1,1 @@
+random_password: "{{ lookup('password', '/dev/null length=25 chars=ascii_letters') }}"

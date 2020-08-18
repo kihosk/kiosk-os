@@ -2,3 +2,4 @@
   ufw:
     state: enabled
     policy: deny
+  tags: [production]
