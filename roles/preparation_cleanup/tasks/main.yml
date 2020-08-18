@@ -15,6 +15,5 @@
   tags: [production]
 
 - name: Lock raspberry pi user
-  shell: |
-    echo -e "raspberry\n{{random_password}}\n{{random_password}}" | passwd pi
+  shell: echo -e 'raspberry\n{{random_password}}\n{{random_password}}' | passwd pi
   tags: [production]
