@@ -8,5 +8,6 @@
     - autologin
     - splashscreen
     - services
+    - firewall
     - download_latest
     - preparation_cleanup

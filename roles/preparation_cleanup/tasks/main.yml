@@ -1,4 +1,9 @@
-- name: Cleanup
+- name: Cleanup Wifi credentials
+  copy:
+    src: wpa_supplicant.conf
+    dest: /etc/wpa_supplicant/wpa_supplicant.conf
+
+- name: Cleanup machine id and bash history
   shell: |
     # Remove machine ID
     sudo rm -f /etc/machine-id
