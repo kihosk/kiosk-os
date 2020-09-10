@@ -10,3 +10,4 @@
     url: "{{ latesturl.stdout }}"
     dest: /home/pi/kiosk-app.AppImage
     mode: "775"
+    force: yes
