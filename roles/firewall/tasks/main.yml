@@ -1,4 +1,4 @@
-- name: Deny everything and enable UFW
+- name: Deny everything and enable UFW change
   ufw:
     state: enabled
     policy: deny
