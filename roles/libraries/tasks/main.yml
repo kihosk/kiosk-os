@@ -5,7 +5,7 @@
   blockinfile:
     path: /etc/apt/sources.list
     block: |
-      deb https://packages.fluentbit.io/debian/buster buster main
+      deb https://packages.fluentbit.io/raspbian/buster buster main
 
 - name: Install OS libraries
   apt:
