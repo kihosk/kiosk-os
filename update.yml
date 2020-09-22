@@ -9,5 +9,3 @@
     - services
     - firewall
     - logs
-  environment:
-    MACHINEID: "{{ lookup('file', '/etc/machine-id') }}"

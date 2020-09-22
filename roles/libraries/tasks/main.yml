@@ -1,3 +1,6 @@
+- hostname:
+  name: "{{ lookup('file', '/etc/machine-id') }}"
+  
 - name: Add Fluent-bit key
   shell: wget -qO - https://packages.fluentbit.io/fluentbit.key | sudo apt-key add -
 

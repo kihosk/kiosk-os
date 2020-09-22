@@ -7,8 +7,4 @@
   service:
     name: td-agent-bit
     enabled: yes
-
-- name: Fluent-bit [restart service]
-  service:
-    name: td-agent-bit
-    state: restarted
+    state: started
