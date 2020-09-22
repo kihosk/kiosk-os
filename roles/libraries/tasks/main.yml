@@ -1,3 +1,12 @@
+- name: Add Fluent-bit key
+  shell: wget -qO - https://packages.fluentbit.io/fluentbit.key | sudo apt-key add -
+
+- name: Add source for fluent-bit
+  blockinfile:
+    path: /etc/apt/sources.list
+    block: |
+      deb https://packages.fluentbit.io/debian/buster buster main
+
 - name: Install OS libraries
   apt:
     name:
@@ -14,6 +23,7 @@
         "fail2ban",
         "hostapd",
         "dnsmasq",
+        "td-agent-bit"
       ]
     state: present
     update_cache: True

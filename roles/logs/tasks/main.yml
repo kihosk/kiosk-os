@@ -1,0 +1,14 @@
+- name: Fluent-bit [copy config file]
+  copy:
+    src: td-agent-bit.conf
+    dest: /etc/td-agent-bit/td-agent-bit.conf
+
+- name: Fluent-bit [enable service]
+  service:
+    name: td-agent-bit
+    enabled: yes
+
+- name: Fluent-bit [restart service]
+  service:
+    name: td-agent-bit
+    state: restarted
