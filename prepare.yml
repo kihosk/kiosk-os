@@ -9,5 +9,6 @@
     - splashscreen
     - services
     - firewall
+    - logs
     - download_latest
     - preparation_cleanup
