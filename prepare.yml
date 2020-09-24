@@ -2,6 +2,7 @@
 - hosts: localhost
   roles:
     - libraries
+    - ssh_key
     - x11
     - boot_config
     - boot_kernel
