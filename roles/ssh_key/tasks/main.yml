@@ -12,6 +12,6 @@
 
 - name: Add config
   copy:
-    src: robot_rsa.pub
-    dest: /home/pi/.ssh/config.pub
+    src: config
+    dest: /home/pi/.ssh/config
     mode: "0600"
