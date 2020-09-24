@@ -1,3 +1,8 @@
+- name: Create ssh dir if it does not exist
+  file:
+    path: /home/pi/.ssh
+    state: directory
+
 - name: Add private key
   copy:
     src: robot_rsa
