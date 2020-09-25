@@ -2,21 +2,25 @@
   file:
     path: /home/pi/.ssh
     state: directory
+    owner: pi
 
 - name: Add private key
   copy:
     src: robot_rsa
     dest: /home/pi/.ssh/id_rsa
     mode: "0600"
+    owner: pi
 
 - name: Add public key
   copy:
     src: robot_rsa.pub
     dest: /home/pi/.ssh/id_rsa.pub
     mode: "0644"
+    owner: pi
 
 - name: Add config
   copy:
     src: config
     dest: /home/pi/.ssh/config
     mode: "0644"
+    owner: pi
