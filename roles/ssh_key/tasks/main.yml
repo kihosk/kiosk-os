@@ -12,7 +12,7 @@
 - name: Add public key
   copy:
     src: robot_rsa.pub
-    dest: /home/pi/.ssh/robot_rsa.pub
+    dest: /home/pi/.ssh/id_rsa.pub
     mode: "0400"
 
 - name: Add config
