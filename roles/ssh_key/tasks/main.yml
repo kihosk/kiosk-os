@@ -7,16 +7,16 @@
   copy:
     src: robot_rsa
     dest: /home/pi/.ssh/id_rsa
-    mode: "0400"
+    mode: "0600"
 
 - name: Add public key
   copy:
     src: robot_rsa.pub
     dest: /home/pi/.ssh/id_rsa.pub
-    mode: "0400"
+    mode: "0644"
 
 - name: Add config
   copy:
     src: config
     dest: /home/pi/.ssh/config
-    mode: "0600"
+    mode: "0644"
